@@ -27,9 +27,11 @@ const formatStatus = (status?: ApplicationStatus) => {
   return status.charAt(0).toUpperCase() + status.slice(1);
 };
 
-// Helper to format date
+// Helper to format date (avoid timezone issues)
 const formatDate = (dateString: string) => {
-  const date = new Date(dateString);
+  // Parse date as local date to avoid timezone conversion
+  const [year, month, day] = dateString.split('-').map(Number);
+  const date = new Date(year, month - 1, day);
   return date.toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'short',
