@@ -199,9 +199,12 @@ export default function ApplicationDetail({ params }: { params: { id: string } }
 
           {/* Action Buttons */}
           <div className="flex gap-3 mt-8 pt-6 border-t border-gray-200">
-            <button className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors font-medium">
+            <Link
+              href={`/applications/${application.id}/edit`}
+              className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors font-medium text-center"
+            >
               Edit Application
-            </button>
+            </Link>
             <button className="px-4 py-2 border border-red-300 text-red-600 rounded-md hover:bg-red-50 transition-colors font-medium">
               Delete
             </button>

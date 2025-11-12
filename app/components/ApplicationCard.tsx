@@ -79,9 +79,12 @@ export default function ApplicationCard({ application }: ApplicationCardProps) {
         >
           View Details
         </Link>
-        <button className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors text-gray-700 font-medium">
+        <Link
+          href={`/applications/${application.id}/edit`}
+          className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors text-gray-700 font-medium text-center"
+        >
           Edit
-        </button>
+        </Link>
       </div>
     </div>
   );
