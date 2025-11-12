@@ -63,12 +63,9 @@ export async function POST(request: NextRequest) {
     const fileContents = await fs.readFile(filePath, 'utf8');
     const data: ApplicationsData = JSON.parse(fileContents);
 
-    // Generate new ID (find max ID and increment)
-    const maxId = data.applications.reduce((max, app) => {
-      const id = parseInt(app.id, 10);
-      return id > max ? id : max;
-    }, 0);
-    const newId = String(maxId + 1);
+    // Increment counter and use it as new ID
+    data.counter += 1;
+    const newId = data.counter;
 
     // Create the complete application object
     const application: Application = {

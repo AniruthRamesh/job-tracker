@@ -8,7 +8,7 @@ export enum ApplicationStatus {
 }
 
 export interface Application {
-  id: string;
+  id: number;
   dateReceived: string;
   company: string;
   role: string;
@@ -35,5 +35,6 @@ export interface InterviewQuestion {
 }
 
 export interface ApplicationsData {
+  counter: number;
   applications: Application[];
 }

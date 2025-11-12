@@ -13,8 +13,9 @@ export async function GET(
     const fileContents = await fs.readFile(filePath, 'utf8');
     const data: ApplicationsData = JSON.parse(fileContents);
 
-    // Find the application by ID
-    const application = data.applications.find(app => app.id === params.id);
+    // Find the application by ID (convert string param to number)
+    const applicationId = parseInt(params.id, 10);
+    const application = data.applications.find(app => app.id === applicationId);
 
     if (!application) {
       return NextResponse.json(
@@ -57,8 +58,9 @@ export async function PUT(
     const fileContents = await fs.readFile(filePath, 'utf8');
     const data: ApplicationsData = JSON.parse(fileContents);
 
-    // Find the application index
-    const applicationIndex = data.applications.findIndex(app => app.id === params.id);
+    // Find the application index (convert string param to number)
+    const applicationId = parseInt(params.id, 10);
+    const applicationIndex = data.applications.findIndex(app => app.id === applicationId);
 
     if (applicationIndex === -1) {
       return NextResponse.json(
@@ -75,7 +77,7 @@ export async function PUT(
     data.applications[applicationIndex] = {
       ...data.applications[applicationIndex],
       ...updates,
-      id: params.id // Ensure ID cannot be changed
+      id: applicationId // Ensure ID cannot be changed
     };
 
     // Write the updated data back to the file
