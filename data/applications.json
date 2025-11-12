@@ -6,7 +6,8 @@
       "company": "Constructor",
       "role": "Full Stack Engineer",
       "jobDescription": "We're looking for a passionate and skilled full-stack engineer to join our Searchandizing team. You'll be responsible for creating and maintaining the tools used by merchandisers of global e-commerce brands to manage their product discovery experience. Your focus will be on delivering features for our Searchandizing dashboard, improving system stability, and scaling our solutions to better serve merchandisers.\n\nOur ultimate goal is to enhance the product discovery experience for shoppers worldwide and improve the onboarding process for new merchandisers, making it faster and easier for them to get up and running on the Constructor platform.\n\nRequirements:\n- Hands on experience with Python\n- Have strong hands on experience with backend development\n- Have hands on experience with devops tools like (AWS-ECS, Cloud Watch, etc.)\n- Have experience launching and operating backend systems\n- Hands on experience with Flask or similar web frameworks for building APIs\n- Experience owning and deploying full stack services\n- Experience with automated testing practices\n- Familiarity with CI/CD best practices\n- Hands on experience with react is a plus\n- Familiarity with frontend best coding practices\n- Excellent communication and collaboration skills\n- A proactive and results-oriented mindset\n- Experience working in remote environments will be a plus",
-      "currentStage": "Coding Interview with Hiring Manager"
+      "currentStage": "Coding Interview with Hiring Manager",
+      "culture": "Fully Remote : TODO ADD MORE INFO"
     },
     {
       "id": "2",
@@ -70,6 +71,16 @@
       "company": "CaseGuard",
       "role": "Software Engineer – Backend",
       "jobDescription": "We are seeking a highly independent and proactive Software Engineer to join our backend team and play a critical role in building REST API microservices from scratch using ASP.NET Core (C#) and building cloud infrastructure using Infrastructure as Code (IaC) in AWS. In this role, you will contribute to collaborative file redacting tool with exciting features like live editing, image processing and more.\n\nLocation: Arlington, VA\n\nWhat you will do:\n- Design and build scalable REST APIs for our microservices using ASP.NET Core (C#)\n- Implement efficient and secure API endpoints with a focus on performance and maintainability\n- Design and deploy AWS-based infrastructure using IaC tools (e.g., AWS CDK)\n- Participate in architectural discussions and contribute to decisions for system design and service structure\n- Optimize APIs for performance and scalability by identifying and resolving bottlenecks\n- Collaborate with cross-functional teams to align on feature requirements and implementation plans\n- Write clean, well-documented, and maintainable code while following best practices\n\nQualifications (Required):\n- Bachelor's degree in Computer Science, Software Engineering, or equivalent experience\n- 2+ years of experience as a backend software engineer, focusing on REST API development\n- Strong proficiency in C# and ASP.NET Core framework\n- Experience designing and implementing REST APIs\n- Familiarity with relational and NoSQL databases (e.g., SQL Server, MongoDB)\n- Experience with Git for version control and collaborative development\n- Ability to work independently and take ownership of complex backend tasks\n\nQualifications (It's a plus):\n- Strong understanding of distributed systems, scalability, and fault-tolerance patterns\n- Familiarity with API design patterns such as Clean Architecture\n- Hands-on experience with AWS services (e.g., EC2, S3, Lambda, RDS, DynamoDB)\n- Practical knowledge of IaC tools (e.g., AWS CDK, Terraform, CloudFormation)\n- Experience with containerization tools (e.g., Docker) and orchestration platforms (e.g., Kubernetes)\n- Familiarity with event-driven architectures and message queues (e.g., SNS, SQS, EventBridge)\n- Knowledge of asynchronous programming and multi-threading in C#\n- Relevant AWS certifications (e.g., AWS Certified Solutions Architect, AWS Certified Developer)\n\nBenefits:\n- Competitive Salary\n- Stock Option\n- Medical, Dental, and Vision Insurance\n- Paid Vacation\n- Ten paid holidays per year\n- Friendly and Learning environment"
+    },
+    {
+      "company": "TEST",
+      "role": "ENGINEER",
+      "dateReceived": "2025-11-12",
+      "jobDescription": "RANDOM",
+      "culture": "SUPER ",
+      "mission": "BEST",
+      "interviewProcess": "EASY OFFER",
+      "id": "11"
     }
   ]
 }

@@ -52,3 +52,49 @@ export async function GET(request: NextRequest) {
     );
   }
 }
+
+export async function POST(request: NextRequest) {
+  try {
+    // Parse the request body
+    const newApplication: Omit<Application, 'id'> = await request.json();
+
+    // Read the applications.json file
+    const filePath = path.join(process.cwd(), 'data', 'applications.json');
+    const fileContents = await fs.readFile(filePath, 'utf8');
+    const data: ApplicationsData = JSON.parse(fileContents);
+
+    // Generate new ID (find max ID and increment)
+    const maxId = data.applications.reduce((max, app) => {
+      const id = parseInt(app.id, 10);
+      return id > max ? id : max;
+    }, 0);
+    const newId = String(maxId + 1);
+
+    // Create the complete application object
+    const application: Application = {
+      ...newApplication,
+      id: newId
+    };
+
+    // Add to the end of the array
+    data.applications.push(application);
+
+    // Write the updated data back to the file
+    await fs.writeFile(filePath, JSON.stringify(data, null, 2), 'utf8');
+
+    return NextResponse.json({
+      success: true,
+      application: application
+    }, { status: 201 });
+  } catch (error) {
+    console.error('Error creating application:', error);
+    return NextResponse.json(
+      {
+        success: false,
+        error: 'Failed to create application',
+        message: error instanceof Error ? error.message : 'Unknown error'
+      },
+      { status: 500 }
+    );
+  }
+}
