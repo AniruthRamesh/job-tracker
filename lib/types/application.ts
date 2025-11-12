@@ -1,5 +1,12 @@
 // Common types for job applications
 
+export enum ApplicationStatus {
+  RECRUITER = 'recruiter',
+  ONGOING = 'ongoing',
+  REJECTED = 'rejected',
+  SUCCESS = 'success'
+}
+
 export interface Application {
   id: string;
   dateReceived: string;
@@ -12,7 +19,7 @@ export interface Application {
   values?: string[];
   interviewProcess?: string;
   currentStage?: string;
-  status?: string;
+  status?: ApplicationStatus;
   metadata?: Record<string, any>;
   prepQuestions?: Record<string, string>;
   interviewQuestions?: InterviewQuestion[];
