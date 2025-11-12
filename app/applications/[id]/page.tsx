@@ -242,9 +242,9 @@ export default function ApplicationDetail({ params }: { params: { id: string } }
         </div>
 
         {/* Two-Pane Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Left Pane - Company Details */}
-          <div className="bg-white rounded-lg shadow-lg p-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Left Pane - Company Details & Prep Questions */}
+          <div className="lg:col-span-2 bg-white rounded-lg shadow-lg p-8">
             {/* Company and Role */}
             <div className="flex justify-between items-start mb-6">
               <div>
@@ -330,10 +330,36 @@ export default function ApplicationDetail({ params }: { params: { id: string } }
                 <p className="text-sm text-gray-700">{application.notes}</p>
               </div>
             )}
+
+            {/* Separator */}
+            <div className="my-6 border-t-2 border-gray-300"></div>
+
+            {/* Prep Questions Display Section */}
+            <div>
+              <div className="flex items-center mb-4">
+                <svg className="w-5 h-5 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <h2 className="text-xl font-bold text-gray-900">Interview Prep</h2>
+              </div>
+
+              {Object.entries(prepQuestions).length === 0 ? (
+                <p className="text-gray-500 text-sm italic py-4">No prep questions yet. Add them using the panel on the right →</p>
+              ) : (
+                <div className="space-y-4">
+                  {Object.entries(prepQuestions).map(([question, answer], index) => (
+                    <div key={index} className="border-l-4 border-green-500 pl-4 py-2">
+                      <h4 className="font-semibold text-gray-900 text-sm mb-1">{question}</h4>
+                      <p className="text-gray-700 text-sm">{answer || 'No answer provided'}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
 
-          {/* Right Pane - Questions Tabs */}
-          <div className="bg-white rounded-lg shadow-lg p-8">
+          {/* Right Pane - Questions Management */}
+          <div className="bg-white rounded-lg shadow-lg p-6">
             {/* Tabs */}
             <div className="flex border-b border-gray-200 mb-6">
               <button
@@ -361,64 +387,67 @@ export default function ApplicationDetail({ params }: { params: { id: string } }
             {/* Prep Questions Tab */}
             {activeTab === 'prep' && (
               <div>
-                <h2 className="text-lg font-bold text-gray-900 mb-4">Prep Questions</h2>
+                <h2 className="text-base font-bold text-gray-900 mb-3">Manage Prep Questions</h2>
 
                 {/* Add New Prep Question */}
-                <div className="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
-                  <h3 className="text-sm font-semibold text-gray-900 mb-3">Add New Question</h3>
+                <div className="mb-4 p-3 bg-gray-50 rounded-lg border border-gray-200">
+                  <h3 className="text-xs font-semibold text-gray-900 mb-2">Add New</h3>
                   <input
                     type="text"
-                    placeholder="Question (e.g., Tell me about yourself)"
+                    placeholder="Question"
                     value={newPrepQuestion}
                     onChange={(e) => setNewPrepQuestion(e.target.value)}
-                    className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm mb-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full border border-gray-300 rounded-md px-2 py-1.5 text-xs mb-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                   <textarea
                     placeholder="Your answer..."
                     value={newPrepAnswer}
                     onChange={(e) => setNewPrepAnswer(e.target.value)}
                     rows={3}
-                    className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm mb-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full border border-gray-300 rounded-md px-2 py-1.5 text-xs mb-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                   <button
                     onClick={handleAddPrepQuestion}
-                    className="w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 transition-colors text-sm font-medium"
+                    className="w-full bg-green-600 text-white py-1.5 px-3 rounded-md hover:bg-green-700 transition-colors text-xs font-medium"
                   >
                     Add Question
                   </button>
                 </div>
 
-                {/* Display Prep Questions */}
-                <div className="space-y-4 mb-6 max-h-96 overflow-y-auto">
-                  {Object.entries(prepQuestions).length === 0 ? (
-                    <p className="text-gray-500 text-sm text-center py-8">No prep questions yet. Add one above!</p>
-                  ) : (
-                    Object.entries(prepQuestions).map(([question, answer], index) => (
-                      <div key={index} className="border border-gray-200 rounded-lg p-4">
-                        <div className="flex justify-between items-start mb-2">
-                          <h4 className="font-semibold text-gray-900 text-sm flex-1">{question}</h4>
-                          <button
-                            onClick={() => handleDeletePrepQuestion(question)}
-                            className="text-red-600 hover:text-red-800 ml-2"
-                          >
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                          </button>
+                {/* Edit/Delete Existing Questions */}
+                <div className="mb-4">
+                  <h3 className="text-xs font-semibold text-gray-900 mb-2">Existing Questions ({Object.entries(prepQuestions).length})</h3>
+                  <div className="space-y-2 max-h-64 overflow-y-auto">
+                    {Object.entries(prepQuestions).length === 0 ? (
+                      <p className="text-gray-400 text-xs text-center py-4">No questions yet</p>
+                    ) : (
+                      Object.entries(prepQuestions).map(([question, answer], index) => (
+                        <div key={index} className="border border-gray-200 rounded p-2 bg-white">
+                          <div className="flex justify-between items-start mb-1">
+                            <p className="font-medium text-gray-900 text-xs flex-1">{question}</p>
+                            <button
+                              onClick={() => handleDeletePrepQuestion(question)}
+                              className="text-red-600 hover:text-red-800 ml-1"
+                              title="Delete"
+                            >
+                              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                              </svg>
+                            </button>
+                          </div>
                         </div>
-                        <p className="text-gray-700 text-sm">{answer || 'No answer provided'}</p>
-                      </div>
-                    ))
-                  )}
+                      ))
+                    )}
+                  </div>
                 </div>
 
                 {/* Save Button */}
                 <button
                   onClick={handleSavePrepQuestions}
                   disabled={saving}
-                  className="w-full bg-blue-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 transition-colors font-medium disabled:bg-blue-400"
+                  className="w-full bg-blue-600 text-white py-2 px-3 rounded-md hover:bg-blue-700 transition-colors text-sm font-medium disabled:bg-blue-400"
                 >
-                  {saving ? 'Saving...' : 'Save Prep Questions'}
+                  {saving ? 'Saving...' : 'Save Changes'}
                 </button>
               </div>
             )}
@@ -426,83 +455,86 @@ export default function ApplicationDetail({ params }: { params: { id: string } }
             {/* Interview Questions Tab */}
             {activeTab === 'interview' && (
               <div>
-                <h2 className="text-lg font-bold text-gray-900 mb-4">Interview Questions</h2>
+                <h2 className="text-base font-bold text-gray-900 mb-3">Manage Interview Questions</h2>
 
                 {/* Add New Interview Question */}
-                <div className="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
-                  <h3 className="text-sm font-semibold text-gray-900 mb-3">Add New Question</h3>
+                <div className="mb-4 p-3 bg-gray-50 rounded-lg border border-gray-200">
+                  <h3 className="text-xs font-semibold text-gray-900 mb-2">Add New</h3>
                   <input
                     type="text"
                     placeholder="Question *"
                     value={newIntQuestion}
                     onChange={(e) => setNewIntQuestion(e.target.value)}
-                    className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm mb-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full border border-gray-300 rounded-md px-2 py-1.5 text-xs mb-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                   <textarea
                     placeholder="Your answer (optional)"
                     value={newIntAnswer}
                     onChange={(e) => setNewIntAnswer(e.target.value)}
-                    rows={3}
-                    className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm mb-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    rows={2}
+                    className="w-full border border-gray-300 rounded-md px-2 py-1.5 text-xs mb-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                   <div className="grid grid-cols-2 gap-2 mb-2">
                     <input
                       type="text"
-                      placeholder="Round (e.g., Technical)"
+                      placeholder="Round"
                       value={newIntRound}
                       onChange={(e) => setNewIntRound(e.target.value)}
-                      className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full border border-gray-300 rounded-md px-2 py-1.5 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                     <input
                       type="date"
                       value={newIntDate}
                       onChange={(e) => setNewIntDate(e.target.value)}
-                      className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full border border-gray-300 rounded-md px-2 py-1.5 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
                   <button
                     onClick={handleAddInterviewQuestion}
-                    className="w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 transition-colors text-sm font-medium"
+                    className="w-full bg-green-600 text-white py-1.5 px-3 rounded-md hover:bg-green-700 transition-colors text-xs font-medium"
                   >
                     Add Question
                   </button>
                 </div>
 
                 {/* Display Interview Questions */}
-                <div className="space-y-4 mb-6 max-h-96 overflow-y-auto">
-                  {interviewQuestions.length === 0 ? (
-                    <p className="text-gray-500 text-sm text-center py-8">No interview questions yet. Add one above!</p>
-                  ) : (
-                    interviewQuestions.map((q, index) => (
-                      <div key={index} className="border border-gray-200 rounded-lg p-4">
-                        <div className="flex justify-between items-start mb-2">
-                          <h4 className="font-semibold text-gray-900 text-sm flex-1">{q.question}</h4>
-                          <button
-                            onClick={() => handleDeleteInterviewQuestion(index)}
-                            className="text-red-600 hover:text-red-800 ml-2"
-                          >
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                          </button>
+                <div className="mb-4">
+                  <h3 className="text-xs font-semibold text-gray-900 mb-2">Existing Questions ({interviewQuestions.length})</h3>
+                  <div className="space-y-2 max-h-64 overflow-y-auto">
+                    {interviewQuestions.length === 0 ? (
+                      <p className="text-gray-400 text-xs text-center py-4">No questions yet</p>
+                    ) : (
+                      interviewQuestions.map((q, index) => (
+                        <div key={index} className="border border-gray-200 rounded p-2 bg-white">
+                          <div className="flex justify-between items-start mb-1">
+                            <p className="font-medium text-gray-900 text-xs flex-1">{q.question}</p>
+                            <button
+                              onClick={() => handleDeleteInterviewQuestion(index)}
+                              className="text-red-600 hover:text-red-800 ml-1"
+                              title="Delete"
+                            >
+                              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                              </svg>
+                            </button>
+                          </div>
+                          <div className="flex gap-1 text-xs text-gray-500 mt-1">
+                            {q.round && <span className="px-1.5 py-0.5 bg-blue-100 text-blue-800 rounded text-xs">{q.round}</span>}
+                            {q.date && <span className="px-1.5 py-0.5 bg-gray-100 text-gray-800 rounded text-xs">{formatDate(q.date)}</span>}
+                          </div>
                         </div>
-                        {q.myAnswer && <p className="text-gray-700 text-sm mb-2">{q.myAnswer}</p>}
-                        <div className="flex gap-2 text-xs text-gray-500">
-                          {q.round && <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded">Round: {q.round}</span>}
-                          {q.date && <span className="px-2 py-1 bg-gray-100 text-gray-800 rounded">Date: {formatDate(q.date)}</span>}
-                        </div>
-                      </div>
-                    ))
-                  )}
+                      ))
+                    )}
+                  </div>
                 </div>
 
                 {/* Save Button */}
                 <button
                   onClick={handleSaveInterviewQuestions}
                   disabled={saving}
-                  className="w-full bg-blue-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 transition-colors font-medium disabled:bg-blue-400"
+                  className="w-full bg-blue-600 text-white py-2 px-3 rounded-md hover:bg-blue-700 transition-colors text-sm font-medium disabled:bg-blue-400"
                 >
-                  {saving ? 'Saving...' : 'Save Interview Questions'}
+                  {saving ? 'Saving...' : 'Save Changes'}
                 </button>
               </div>
             )}
