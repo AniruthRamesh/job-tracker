@@ -60,9 +60,13 @@ export default function ApplicationCard({ application }: ApplicationCardProps) {
       </div>
 
       {application.currentStage && (
-        <div className="mb-4">
-          <span className="text-sm font-medium text-gray-700">Current Stage: </span>
-          <span className="text-sm text-gray-600">{application.currentStage}</span>
+        <div className="mb-4 flex items-center">
+          <svg className="w-4 h-4 mr-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+          <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800 border border-purple-300">
+            {application.currentStage}
+          </span>
         </div>
       )}
 

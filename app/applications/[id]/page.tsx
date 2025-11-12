@@ -141,9 +141,18 @@ export default function ApplicationDetail({ params }: { params: { id: string } }
 
           {/* Current Stage */}
           {application.currentStage && (
-            <div className="mb-6">
-              <h2 className="text-lg font-semibold text-gray-900 mb-2">Current Stage</h2>
-              <p className="text-gray-700">{application.currentStage}</p>
+            <div className="mb-6 pb-6 border-b border-gray-200">
+              <div className="flex items-center">
+                <svg className="w-6 h-6 mr-3 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                <div>
+                  <h2 className="text-sm font-medium text-gray-500 mb-1">Current Stage</h2>
+                  <span className="inline-flex items-center px-4 py-2 rounded-lg text-base font-semibold bg-purple-100 text-purple-800 border border-purple-300">
+                    {application.currentStage}
+                  </span>
+                </div>
+              </div>
             </div>
           )}
 
